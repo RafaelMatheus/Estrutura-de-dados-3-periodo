@@ -2,7 +2,11 @@
  * Pilha.c
  *
  *  Created on: 09/04/2017
- *      Author: rafael
+ *      Author: Rafael Matheus
+ *      Matricula: 1610014657
+ *      Disciplica: Estrutura de dados
+ *      Professor: Wallace Bonfim
+ *
  */
 
 #include <stdio.h>
@@ -23,6 +27,9 @@ typedef struct pilha {
 } t_pilha;
 
 
+/**
+ * Verifica se a lista está cheia ou vazia
+ */
 
 
 int isCheia(t_pilha * pilha) {
@@ -30,9 +37,14 @@ int isCheia(t_pilha * pilha) {
 }
 
 
+/**
+ * Coloca a placa do carro na posição i+ (-1) onde
+ *
+ */
 
 int push(t_pilha *pilha, t_elemento valor)
 {
+
     if (isCheia(pilha))
         return 0; // erro
 
@@ -67,21 +79,28 @@ t_elemento pop(t_pilha *pilha){
 
 }
 
-
+/**
+ * Pega os elementos do topo da pilha e retorna um t_elemento
+ */
 t_elemento getElementoTopo(t_pilha * pilha)
 {
 
         return pilha->vetor[pilha->topo--];
 }
 
-
+/**
+ * Função responsavel por retirar os carros
+ * e imprimir as placas
+ */
 
 void tiraCarros(t_pilha *pilha, int qntCarrosRetirados){
 
     int i;
-    int j = 1;
+    int j = 1;//Guarda a posição de saida dos carros
+
     t_elemento saidaCarros;
-    for(i = pilha->topo; i > -1; i--){
+    for(i = pilha->topo; i > -1; i--){// -1 é o inicio da pilha
+
     	printf("A placa do %dª carro a sair e %s\n", j, pilha->vetor[pilha->topo]);
     	pop(pilha);
     	j++;
@@ -99,10 +118,12 @@ t_pilha pilha;
 pilha.topo = -1;
 
 entraCarros(&pilha);
-// Mostrar placa
-printf("A placa do ultimo carro e: %s\n", pilha.vetor[pilha.topo].placa);
+// Mostrar placa do primeiro carro a sair (ultimo carro a entrar na pillha)
+printf("A placa do ultimo carro a entrar e: %s\n\n", pilha.vetor[pilha.topo].placa);
 
+//Remove os carros mostrando a placa de todos na ordem que saem
 tiraCarros(&pilha, MAX);
+
 
 //Mostra quantos carros sobraram
 printf("\nRestaram %d carros", (pilha.topo) +1 );
