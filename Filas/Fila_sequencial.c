@@ -118,7 +118,7 @@ void exibir(t_fila * fila) {
     printf("\nExibindo fila:\n");
     printf("inicio: %d\n", fila->inicio);
     printf("fim:    %d\n", fila->fim);
-    for (i=0 ; i<fila->quant_element; i++) {
+    for (i=0 ; i < fila->quant_element; i++) {
         printf("%d: %s\n", i+1, fila->vetor[i].nome);
     }
 }
@@ -163,7 +163,7 @@ int main(){
 
 	removerPessoa(&fila); //Funcao para remover 3 pessoas da fila e imprime as que estao sendo removidas
 
-	for(i = 0; i < fila.quant_element; i++){ //Insere mais 4 pessoas na fila
+	for(i = 0; i < MAX; i++){ //Insere mais 4 pessoas na fila
 		printf("informe o nome da %d pessoa a entrar na fila: ", (i+1) );
 		scanf("%s", elemento.nome);
 
