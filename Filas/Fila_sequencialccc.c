@@ -181,6 +181,5 @@ int main(){
 		exibir(&fila);
 	}
 
-	exibir(&fila);
 
 }
