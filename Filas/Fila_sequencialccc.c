@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 // tamanho maximo da fila
-#define MAX 4
+#define MAX 5
 
 // Tipo base dos elementos da fila
 typedef struct elementos {
@@ -119,16 +119,16 @@ void exibir(t_fila * fila) {
     printf("inicio: %d\n", fila->inicio);
     printf("fim:    %d\n", fila->fim);
     
+    if(fila->inicio == fila->fim + 1){
+    	for(i = fila->inicio; i != (fila->fim) % MAX; i = (i+1) % MAX)
+        	printf("%d: %s\n", i+1, fila->vetor[i].nome);
+    	printf("ultima: %s\n", fila->vetor[fila->fim].nome);
+    	return;
+	}
     for(i = fila->inicio; i != (fila->fim + 1) % MAX; i = (i+1) % MAX){
-     
-    	
         printf("%d: %s\n", i+1, fila->vetor[i].nome);
     }
-    if(fila->inicio == fila->fim){
-    	printf("%s", fila->vetor[fila->fim].nome);
-	}
-    
-  
+     
 }
 
 void EntrarPessoas(t_fila * fila){
@@ -136,7 +136,7 @@ void EntrarPessoas(t_fila * fila){
 	t_elemento elemento;
 
 
-	for(i = 0; i < MAX; i++){
+	for(i = 0; i < MAX-1; i++){
 		printf("informe o nome da pessoa %d: ", (i+1));
 		scanf("%s", &elemento.nome);
 		inserir(fila, elemento);
@@ -173,7 +173,7 @@ int main(){
 
 	removerPessoa(&fila); //Funcao para remover 3 pessoas da fila e imprime as que estao sendo removidas
 
-	for(i = 0; i < MAX; i++){ //Insere mais 4 pessoas na fila
+	for(i = 0; i < MAX-1; i++){ //Insere mais 4 pessoas na fila
 		printf("informe o nome da %d pessoa a entrar na fila: ", (i+1) );
 		scanf("%s", &elemento.nome);
 
@@ -181,6 +181,6 @@ int main(){
 		exibir(&fila);
 	}
 
-
+	exibir(&fila);
 
 }
