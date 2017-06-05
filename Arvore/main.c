@@ -13,12 +13,14 @@ typedef struct no {
 
 typedef t_no* t_arvore;
 
+void exibirPosOrdem(t_arvore tree);
 t_no * criar ();
 int compara(t_elemento dado, t_elemento item);
 int inserir (t_arvore *tree, t_elemento item);
 int menu();
 void lerArquivo(t_arvore* arvore);
-
+void exibirInOrdem(t_arvore tree);
+void exibirPreOrdem(t_arvore tree);
 
 int main()
 {
@@ -30,6 +32,7 @@ int main()
 	int numeroConvertido[100];
 
 	lerArquivo(&arvore);
+	exibirInOrdem(arvore);
 
 /** Observar a saida nesse ponto **/
 
@@ -54,23 +57,23 @@ int compara(t_elemento dado1, t_elemento dado2){
 
 int inserir (t_arvore *tree, t_elemento item)
 {
-int ok;
-// se a raiz for nula, entao insere na raiz
-if (*tree == NULL) {
-*tree = criar();
-if (*tree == NULL)
-return 0;
-(*tree)->dado = item;
-return 1;
-}
-if (compara((*tree)->dado, item)<0)
-ok = inserir (&((*tree)->dir), item);
-else
-if (compara((*tree)->dado, item)>0)
-ok = inserir (&((*tree)->esq), item);
-else
-ok = 0;
-return ok;
+	int ok;
+	// se a raiz for nula, entao insere na raiz
+	if (*tree == NULL) {
+		*tree = criar();
+		if (*tree == NULL)
+		return 0;
+		(*tree)->dado = item;
+		return 1;
+		}
+	if (compara((*tree)->dado, item)<0)
+		ok = inserir (&((*tree)->dir), item);
+	else
+		if (compara((*tree)->dado, item)>0)
+			ok = inserir (&((*tree)->esq), item);
+	else
+		ok = 0;
+	return ok;
 }
 
 
@@ -91,6 +94,34 @@ int menu(){
 	return opc;
 }
 
+void exibirInOrdem(t_arvore tree)
+{
+    if (tree!=NULL) {
+        exibirInOrdem(tree->esq);
+        printf("%s ", tree->dado.nome);
+        exibirInOrdem(tree->dir);
+    }
+}
+
+void exibirPreOrdem(t_arvore tree)
+{
+    if (tree!=NULL) {
+        printf("%s ", tree->dado.nome);
+        exibirPreOrdem(tree->esq);
+        exibirPreOrdem(tree->dir);
+    }
+}
+
+
+void exibirPosOrdem(t_arvore tree)
+{
+    if (tree!=NULL) {
+        exibirPosOrdem(tree->esq);
+        exibirPosOrdem(tree->dir);
+        printf("%s ", tree->dado.nome);
+    }
+}
+
 
 void lerArquivo(t_arvore* arvore){
 	t_elemento elemento;
@@ -108,7 +139,6 @@ void lerArquivo(t_arvore* arvore){
 	while( (ch=fgetc(arq))!= EOF ){
 		if(ch == ';'){
 		elemento.nome[i] = '\0';
-		printf("%s\n", elemento.nome);	
 		inserir(arvore, elemento);
 		i=0;
 } 
