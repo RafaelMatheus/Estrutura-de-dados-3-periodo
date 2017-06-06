@@ -13,6 +13,7 @@ typedef struct no {
 
 typedef t_no* t_arvore;
 
+void exibir(t_arvore arvore);
 t_no * busca(t_arvore tree, t_elemento dado);
 void pesquisar(t_elemento dado, t_arvore tree);
 t_no * buscaSetPai(t_arvore tree, t_elemento dado, t_no ** pai);
@@ -52,9 +53,13 @@ int main()
 				scanf("%s",&dado.nome);
 				pesquisar(dado, arvore);
 				break;
-				
 			
+			case 5:
+				exibir(arvore);
 		}
+		
+	
+			
 		
 	}while(pegaOpc != 0);
 	
@@ -88,7 +93,6 @@ t_no * buscaSetPai(t_arvore tree, t_elemento dado, t_no ** pai)
 }
 
 /**
-
 int remover (t_arvore *tree, t_elemento item) {
     t_no *no, // no aponta para o no a ser removido
         *pai, // pai aponta para o pai do no
@@ -100,7 +104,6 @@ int remover (t_arvore *tree, t_elemento item) {
     no = buscaSetPai(*tree, item, &pai);
     if (no==NULL)
         return 0; // a chave nao existe na arvore, nao conseguiu remover
-
     // agora iremos ver os dois primeiros casos, o no tem um filho no maximo
     if (no->esq == NULL)
         sub = no->dir;
@@ -144,7 +147,6 @@ int remover (t_arvore *tree, t_elemento item) {
              // ocupe o lugar de no
              sub->esq = no->esq;
         }
-
 }
 */
 t_no * busca(t_arvore tree, t_elemento dado)
@@ -263,6 +265,20 @@ void exibirPosOrdem(t_arvore tree)
         exibirPosOrdem(tree->dir);
         printf("%s ", tree->dado.nome);
     }
+}
+
+void exibir(t_arvore arvore){
+	
+	printf("Exibicao em ordem: ");
+	exibirPreOrdem(arvore);
+	printf("\n\n");
+	printf("Exibicao pos ordem: ");
+	exibirPosOrdem(arvore);
+	printf("\n\n");
+	printf("Exibicao in ordem: ");
+	exibirInOrdem(arvore);
+	printf("\n\n");
+	
 }
 
 
