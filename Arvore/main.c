@@ -39,10 +39,10 @@ int main()
 	char str[100];
 	int numeroConvertido[100];
 	t_elemento dado;
-	
+	lerArquivo(&arvore);
 	do{
 		pegaOpc = menu();
-		lerArquivo(&arvore);
+		
 		
 		switch(pegaOpc){
 			
