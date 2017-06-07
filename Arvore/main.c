@@ -55,7 +55,7 @@ int main()
 					scanf("%s", dado.nome);
 					
 					inserir(&arvore, dado);
-					printf("digite 0 para sair: ");
+					printf("digite 0 para sair ou qualquer outro valor para sair: ");
 					scanf("%d", &pOpcSair);
 					
 				}while(pOpcSair != 0);
@@ -67,7 +67,7 @@ int main()
 				scanf("%s",dado.nome);
 				remover(&arvore, dado);
 				break;
-				//ainda nao remove
+			
 				
 			case 3:
 				printf("Informe o dado que voce deseja pesquisar: ");
@@ -132,8 +132,10 @@ int remover (t_arvore *tree, t_elemento item){
     pai=NULL;
     // procura o no a ser removido, e seta o seu pai.
     no = buscaSetPai(*tree, item, &pai);
-    if (no==NULL)
-        return 0; // a chave nao existe na arvore, nao conseguiu remover
+    if (no==NULL){	
+    	printf("conteudo nao existe na arvore ");
+        return 0; 
+		}// a chave nao existe na arvore, nao conseguiu remover
 
     // agora iremos ver os dois primeiros casos, o no tem um filho no maximo
     if (no->esq == NULL)
@@ -280,6 +282,8 @@ int menu(){
 	system("cls");
 	return opc;
 }
+/**
+
 void exibirGraficamente(t_arvore tree, int col, int lin, int desloc)
 {
     // col e lin sao as coordenadas da tela onde a arvore ira iniciar,
@@ -295,6 +299,7 @@ void exibirGraficamente(t_arvore tree, int col, int lin, int desloc)
         exibirGraficamente(tree->dir,col+desloc,lin+2,desloc/2+1);
 }
 
+*/
 void exibirInOrdem(t_arvore tree)
 {
     if (tree!=NULL) {
@@ -335,7 +340,7 @@ void exibir(t_arvore arvore){
 	exibirInOrdem(arvore);
 	printf("\n\n");
 	printf("Exibicao grafica\n");
-	exibirGraficamente(arvore, 10, 10, 3);
+//	exibirGraficamente(arvore, 10, 10, 3);
 	
 	
 }
