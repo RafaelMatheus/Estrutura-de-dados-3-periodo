@@ -24,6 +24,7 @@ int compara(t_elemento dado, t_elemento item);
 int inserir (t_arvore *tree, t_elemento item);
 int menu();
 void lerArquivo(t_arvore* arvore);
+void exibirGraficamente(t_arvore tree, int col, int lin, int desloc);
 void exibirInOrdem(t_arvore tree);
 void exibirPreOrdem(t_arvore tree);
 void apagar();
@@ -40,7 +41,9 @@ int main()
 	int numeroConvertido[100];
 	t_elemento dado;
 	lerArquivo(&arvore);
+	
 	do{
+		
 		pegaOpc = menu();
 		
 		
@@ -262,6 +265,7 @@ void esvaziar(t_arvore *tree)
 
 int menu(){
 	int opc = 0 ;
+	
 	printf("Aluno: Rafael Matheus\n");
 	printf("Disciplina: Estrutura de dados\n");
 	printf("Matricula: 1610014657\n\n");
@@ -273,7 +277,22 @@ int menu(){
 	printf("5 - Exibir arvore\n");
 	printf("0 - sair\n");
 	scanf("%d", &opc);
+	system("cls");
 	return opc;
+}
+void exibirGraficamente(t_arvore tree, int col, int lin, int desloc)
+{
+    // col e lin sao as coordenadas da tela onde a arvore ira iniciar,
+    // ou seja, a posicao da raiz, e desloc representa o deslocamento na tela
+    // (em colunas) de um no em relacao ao no anterior.
+    if (tree == NULL)
+        return; // condicao de parada do procedimento recursivo
+    gotoxy(col,lin);
+    printf("%s",tree->dado.nome);
+    if (tree->esq != NULL)
+        exibirGraficamente(tree->esq,col-desloc,lin+2,desloc/2+1);
+    if (tree->dir != NULL)
+        exibirGraficamente(tree->dir,col+desloc,lin+2,desloc/2+1);
 }
 
 void exibirInOrdem(t_arvore tree)
@@ -315,6 +334,8 @@ void exibir(t_arvore arvore){
 	printf("Exibicao in ordem: ");
 	exibirInOrdem(arvore);
 	printf("\n\n");
+	printf("Exibicao grafica\n");
+	exibirGraficamente(arvore, 10, 10, 3);
 	
 	
 }
