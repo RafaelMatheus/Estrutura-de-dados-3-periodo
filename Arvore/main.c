@@ -34,25 +34,42 @@ int main()
 	FILE *arquivo = NULL;
 	t_arvore arvore = NULL;
 	int pegaOpc = 0;
+	int pOpcSair; 
 	char str[100];
 	int numeroConvertido[100];
 	t_elemento dado;
 	
 	do{
 		pegaOpc = menu();
+		lerArquivo(&arvore);
 		
 		switch(pegaOpc){
 			
 			case 1:
-				lerArquivo(&arvore);
+				do{
+					printf("Digite o numero que voce deseja inserir na arvore: ");
+					scanf("%s", dado.nome);
+					
+					inserir(&arvore, dado);
+					printf("digite 0 para sair: ");
+					scanf("%d", &pOpcSair);
+					
+				}while(pOpcSair != 0);
+				
 				break;
-		//	case 2:
+			case 2:
+				printf("informe o dado que voce deseja remover da arvore: ");
+				scanf("%s",dado.nome);
+				remover(&arvore, dado);
+				break;
+				//ainda nao remove
 				
 			case 3:
 				printf("Informe o dado que voce deseja pesquisar: ");
 				scanf("%s",&dado.nome);
 				pesquisar(dado, arvore);
 				break;
+				
 			
 			case 5:
 				exibir(arvore);
@@ -70,6 +87,7 @@ int main()
 
 return 0;
 }
+
 
 
 t_no * buscaSetPai(t_arvore tree, t_elemento dado, t_no ** pai)
@@ -92,40 +110,29 @@ t_no * buscaSetPai(t_arvore tree, t_elemento dado, t_no ** pai)
     }
 }
 
-/**
-int remover (t_arvore *tree, t_elemento item) {
+
+/** FUNCAO REMOVER **/
+int remover (t_arvore *tree, t_elemento item){
     t_no *no, // no aponta para o no a ser removido
-        *pai, // pai aponta para o pai do no
-        *sub, // sub aponta que ira substituir o no no
-        *paiSuce, // pai do no sucessor
-        *suce; // sucessor do no no
-    no = *tree; pai=NULL;
+         *pai, // pai aponta para o pai do no
+         *sub, // sub aponta que ira substituir o no no
+         *paiSuce, // pai do no sucessor
+         *suce; // sucessor do no no
+    no = *tree;
+    pai=NULL;
     // procura o no a ser removido, e seta o seu pai.
     no = buscaSetPai(*tree, item, &pai);
     if (no==NULL)
         return 0; // a chave nao existe na arvore, nao conseguiu remover
+
     // agora iremos ver os dois primeiros casos, o no tem um filho no maximo
     if (no->esq == NULL)
         sub = no->dir;
-    else {
-        if (no->dir == NULL)
-           sub = no->esq;
-        else { // caso em que o no tem dois filhos
-       }}
-    // insere sub na posicao ocupada anteriormente por no
-    if (pai == NULL) // no eh a raiz, nao tem pai
-       *tree = sub;
     else
-        // verifica se o no eh o filho da esquerda ou da direita
-        if (no == pai->esq)
-            pai->esq = sub;
-        else
-            pai->dir = sub;
-    free(no); // libera o no
-    
-    return 1;
-    
-            else { // caso em que o no tem dois filhos
+    {
+        if (no->dir == NULL)
+            sub = no->esq;
+        else { // caso em que o no tem dois filhos
              paiSuce=no;
              sub = no->dir;
              suce = sub->esq;   // suce eh sempre o filho esq de sub
@@ -147,8 +154,20 @@ int remover (t_arvore *tree, t_elemento item) {
              // ocupe o lugar de no
              sub->esq = no->esq;
         }
+    }
+    // insere sub na posicao ocupada anteriormente por no
+    if (pai == NULL) // no eh a raiz, nao tem pai
+        *tree = sub;
+    else
+        // verifica se o no eh o filho da esquerda ou da direita
+        if (no == pai->esq)
+            pai->esq = sub;
+        else
+            pai->dir = sub;
+    free(no); // libera o no
+    return 1; // verdadeiro, conseguiu remover
 }
-*/
+
 t_no * busca(t_arvore tree, t_elemento dado)
 {
 
@@ -171,12 +190,12 @@ void pesquisar(t_elemento dado, t_arvore tree)
 	retorno = busca(tree, dado);
 	
 	if(retorno == NULL){
-		printf("Conteudo nao existe na arvore: \n ");
+		printf("Conteudo nao existe na arvore: \n");
 		
 	}
 	
 	else{
-		printf("tudo bem");
+		printf("tudo bem o conteudo %s existe na arvore\n", dado.nome);
 	}
 
 
@@ -211,6 +230,7 @@ int inserir (t_arvore *tree, t_elemento item)
 		(*tree)->dado = item;
 		return 1;
 		}
+		
 	if (compara((*tree)->dado, item)<0)
 		ok = inserir (&((*tree)->dir), item);
 	else
