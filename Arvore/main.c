@@ -27,6 +27,7 @@ void lerArquivo(t_arvore* arvore);
 void exibirInOrdem(t_arvore tree);
 void exibirPreOrdem(t_arvore tree);
 void apagar();
+void esvaziar(t_arvore *tree);
 
 int main()
 {
@@ -57,6 +58,7 @@ int main()
 				}while(pOpcSair != 0);
 				
 				break;
+				
 			case 2:
 				printf("informe o dado que voce deseja remover da arvore: ");
 				scanf("%s",dado.nome);
@@ -71,8 +73,13 @@ int main()
 				break;
 				
 			
+			case 4:
+				esvaziar(&arvore);
+				break;
+				
 			case 5:
 				exibir(arvore);
+				break;
 		}
 		
 	
@@ -242,6 +249,16 @@ int inserir (t_arvore *tree, t_elemento item)
 }
 
 
+void esvaziar(t_arvore *tree)
+{
+    if (*tree == NULL)
+        return;
+    esvaziar(&(*tree)->esq);
+    esvaziar(&(*tree)->dir);
+    free(*tree);
+    *tree = NULL;
+}
+
 
 int menu(){
 	int opc = 0 ;
@@ -298,6 +315,7 @@ void exibir(t_arvore arvore){
 	printf("Exibicao in ordem: ");
 	exibirInOrdem(arvore);
 	printf("\n\n");
+	
 	
 }
 
