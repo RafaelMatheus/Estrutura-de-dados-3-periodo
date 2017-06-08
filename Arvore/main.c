@@ -282,7 +282,6 @@ int menu(){
 	system("cls");
 	return opc;
 }
-/**
 
 void exibirGraficamente(t_arvore tree, int col, int lin, int desloc)
 {
@@ -299,7 +298,7 @@ void exibirGraficamente(t_arvore tree, int col, int lin, int desloc)
         exibirGraficamente(tree->dir,col+desloc,lin+2,desloc/2+1);
 }
 
-*/
+
 void exibirInOrdem(t_arvore tree)
 {
     if (tree!=NULL) {
