@@ -288,8 +288,8 @@ int menu(){
 	
 	printf("Aluno: Rafael Matheus\n");
 	printf("Disciplina: Estrutura de dados\n");
-	printf("Matricula: 1610014657\n\n");
-	printf("Professor: Wallace Bonfim\n");
+	printf("Matricula: 1610014657\n");
+	printf("Professor: Wallace Bonfim\n\n");
 
 	printf("1 - Inserir\n");
 	printf("2 - Remover apenas um no\n");
