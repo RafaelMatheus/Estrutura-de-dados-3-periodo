@@ -289,6 +289,7 @@ int menu(){
 	printf("Aluno: Rafael Matheus\n");
 	printf("Disciplina: Estrutura de dados\n");
 	printf("Matricula: 1610014657\n\n");
+	printf("Professor: Wallace Bonfim\n");
 
 	printf("1 - Inserir\n");
 	printf("2 - Remover apenas um no\n");
@@ -348,7 +349,7 @@ void exibirPosOrdem(t_arvore tree)
 
 void exibir(t_arvore arvore){
 	
-	printf("Exibicao em ordem: ");
+	printf("Exibicao pre ordem: ");
 	exibirPreOrdem(arvore);
 	printf("\n\n");
 	printf("Exibicao pos ordem: ");
